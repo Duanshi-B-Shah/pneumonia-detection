@@ -41,7 +41,8 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 COPY src/ src/
 COPY api/ api/
 COPY configs/ configs/
-COPY checkpoints/ checkpoints/
+# Checkpoints are optional (not present in CI, mounted at runtime)
+RUN mkdir -p checkpoints
 
 # Create static directory for Grad-CAM outputs
 RUN mkdir -p static/gradcam
