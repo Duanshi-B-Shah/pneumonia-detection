@@ -1,8 +1,6 @@
 """Pydantic request/response models for the API."""
 from __future__ import annotations
 
-from typing import Optional
-
 from pydantic import BaseModel, Field
 
 
@@ -14,7 +12,7 @@ class PredictionResponse(BaseModel):
     probability_pneumonia: float = Field(..., description="Raw probability of pneumonia")
     class_index: int = Field(..., description="Class index: 0=NORMAL, 1=PNEUMONIA")
     latency_ms: float = Field(..., description="Inference latency in milliseconds")
-    gradcam_url: Optional[str] = Field(None, description="URL to Grad-CAM overlay image")
+    gradcam_url: str | None = Field(None, description="URL to Grad-CAM overlay image")
 
 
 class BatchPredictionItem(BaseModel):

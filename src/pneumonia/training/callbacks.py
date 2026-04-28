@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional
 
 import torch
 
@@ -30,7 +29,7 @@ class EarlyStopping:
         self.min_delta = min_delta
         self.mode = mode
         self.counter = 0
-        self.best_score: Optional[float] = None
+        self.best_score: float | None = None
         self.should_stop = False
 
     def __call__(self, score: float) -> bool:
@@ -86,7 +85,7 @@ class ModelCheckpoint:
         self.checkpoint_dir.mkdir(parents=True, exist_ok=True)
         self.monitor = monitor
         self.mode = mode
-        self.best_score: Optional[float] = None
+        self.best_score: float | None = None
 
     def __call__(
         self,
@@ -94,7 +93,7 @@ class ModelCheckpoint:
         model: torch.nn.Module,
         optimizer: torch.optim.Optimizer,
         epoch: int,
-        metrics: Optional[dict] = None,
+        metrics: dict | None = None,
     ) -> bool:
         """Save checkpoint if score improved.
 

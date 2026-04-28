@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import ClassVar
 
 import torch
 from torch.utils.data import DataLoader, WeightedRandomSampler
@@ -18,7 +19,7 @@ class ChestXrayDataset:
     """Wrapper around ImageFolder with proper transforms and class weighting."""
 
     # Class indices: ImageFolder sorts alphabetically → NORMAL=0, PNEUMONIA=1
-    CLASS_NAMES = ["NORMAL", "PNEUMONIA"]
+    CLASS_NAMES: ClassVar[list[str]] = ["NORMAL", "PNEUMONIA"]
 
     def __init__(self, root: str | Path, split: str, config: Config) -> None:
         """Initialize dataset for a given split.

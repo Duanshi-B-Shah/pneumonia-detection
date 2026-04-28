@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import torch
-import pytest
 
 from pneumonia.model.classifier import PneumoniaClassifier, build_model
 from pneumonia.utils.config import ModelConfig

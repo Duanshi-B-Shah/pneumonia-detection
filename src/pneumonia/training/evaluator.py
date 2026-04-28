@@ -3,9 +3,10 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
-from typing import Optional
+from typing import ClassVar
 
 import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
@@ -33,7 +34,7 @@ logger = get_logger(__name__)
 class Evaluator:
     """Compute and visualize classification metrics."""
 
-    CLASS_NAMES = ["NORMAL", "PNEUMONIA"]
+    CLASS_NAMES: ClassVar[list[str]] = ["NORMAL", "PNEUMONIA"]
 
     def __init__(self, model: PneumoniaClassifier, device: str = "cpu") -> None:
         self.model = model
@@ -100,7 +101,7 @@ class Evaluator:
         self,
         labels: np.ndarray,
         preds: np.ndarray,
-        save_path: Optional[str | Path] = None,
+        save_path: str | Path | None = None,
     ) -> None:
         """Plot and optionally save the confusion matrix."""
         cm = confusion_matrix(labels, preds)
@@ -131,7 +132,7 @@ class Evaluator:
         self,
         labels: np.ndarray,
         probs: np.ndarray,
-        save_path: Optional[str | Path] = None,
+        save_path: str | Path | None = None,
     ) -> None:
         """Plot and optionally save the ROC curve."""
         fpr, tpr, _ = roc_curve(labels, probs)
@@ -156,7 +157,7 @@ class Evaluator:
     def evaluate(
         self,
         dataloader: DataLoader,
-        output_dir: Optional[str | Path] = None,
+        output_dir: str | Path | None = None,
     ) -> dict[str, float]:
         """Full evaluation pipeline: predict → metrics → plots.
 
@@ -197,7 +198,7 @@ def main() -> None:
     loaders = create_dataloaders(config)
 
     evaluator = Evaluator(model, device=config.device)
-    metrics = evaluator.evaluate(loaders["test"], output_dir=args.output_dir)
+    evaluator.evaluate(loaders["test"], output_dir=args.output_dir)
 
     logger.info(f"Evaluation complete. Results saved to {args.output_dir}/")
 

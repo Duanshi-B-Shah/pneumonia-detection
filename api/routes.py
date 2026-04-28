@@ -4,6 +4,7 @@ from __future__ import annotations
 import tempfile
 import uuid
 from pathlib import Path
+from typing import Annotated
 
 from fastapi import APIRouter, File, HTTPException, UploadFile
 
@@ -32,7 +33,7 @@ async def health_check():
 
 
 @router.post("/predict", response_model=PredictionResponse)
-async def predict(file: UploadFile = File(...)):
+async def predict(file: Annotated[UploadFile, File()]):
     """Predict pneumonia from a chest X-ray image.
 
     Accepts JPEG or PNG images. Returns prediction label, confidence,
@@ -80,7 +81,7 @@ async def predict(file: UploadFile = File(...)):
 
 
 @router.post("/batch", response_model=BatchPredictionResponse)
-async def predict_batch(files: list[UploadFile] = File(...)):
+async def predict_batch(files: Annotated[list[UploadFile], File()]):
     """Batch prediction for multiple images."""
     import time
 

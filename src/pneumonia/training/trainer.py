@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import argparse
 import random
-from pathlib import Path
 
 import mlflow
 import numpy as np
@@ -14,8 +13,8 @@ from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-from pneumonia.data.dataset import ChestXrayDataset, create_dataloaders
-from pneumonia.model.classifier import PneumoniaClassifier, build_model
+from pneumonia.data.dataset import create_dataloaders
+from pneumonia.model.classifier import build_model
 from pneumonia.training.callbacks import EarlyStopping, ModelCheckpoint
 from pneumonia.training.evaluator import Evaluator
 from pneumonia.utils.config import Config, load_config

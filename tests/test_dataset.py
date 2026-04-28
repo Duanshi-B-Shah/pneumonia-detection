@@ -16,8 +16,8 @@ class TestAugmentation:
 
     def test_train_transforms_output_shape(self):
         """Train transforms should produce (3, 224, 224) tensors."""
-        from PIL import Image
         import numpy as np
+        from PIL import Image
 
         aug_cfg = AugmentationConfig()
         transform = get_train_transforms(224, aug_cfg)
@@ -30,8 +30,8 @@ class TestAugmentation:
 
     def test_val_transforms_output_shape(self):
         """Val transforms should produce (3, 224, 224) tensors."""
-        from PIL import Image
         import numpy as np
+        from PIL import Image
 
         transform = get_val_transforms(224)
         img = Image.fromarray(np.random.randint(0, 255, (300, 400, 3), dtype=np.uint8))
@@ -41,8 +41,8 @@ class TestAugmentation:
 
     def test_val_transforms_deterministic(self):
         """Val transforms should be deterministic (no randomness)."""
-        from PIL import Image
         import numpy as np
+        from PIL import Image
 
         transform = get_val_transforms(224)
         img = Image.fromarray(np.random.randint(0, 255, (300, 400, 3), dtype=np.uint8))

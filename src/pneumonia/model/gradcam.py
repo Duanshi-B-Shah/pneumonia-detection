@@ -6,7 +6,6 @@ Uses the pytorch-grad-cam library for robust, hook-based extraction.
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional
 
 import numpy as np
 import torch
@@ -66,7 +65,7 @@ class GradCAMExplainer:
     def explain(
         self,
         image_path: str | Path,
-        target_class: Optional[int] = None,
+        target_class: int | None = None,
     ) -> tuple[np.ndarray, np.ndarray]:
         """Generate Grad-CAM heatmap for a given image.
 
@@ -96,7 +95,7 @@ class GradCAMExplainer:
         self,
         image_path: str | Path,
         output_path: str | Path,
-        target_class: Optional[int] = None,
+        target_class: int | None = None,
     ) -> Path:
         """Generate and save the Grad-CAM overlay to disk.
 

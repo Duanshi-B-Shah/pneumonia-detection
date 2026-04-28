@@ -4,7 +4,6 @@ from __future__ import annotations
 import argparse
 import time
 from pathlib import Path
-from typing import Optional
 
 import torch
 from PIL import Image
@@ -43,7 +42,7 @@ class Predictor:
         self.image_size = image_size
         self.transform = get_inference_transforms(image_size)
 
-        self.explainer: Optional[GradCAMExplainer] = None
+        self.explainer: GradCAMExplainer | None = None
         if enable_gradcam:
             self.explainer = GradCAMExplainer(model, image_size, device)
 
@@ -56,7 +55,7 @@ class Predictor:
     def predict(
         self,
         image_path: str | Path,
-        gradcam_output_path: Optional[str | Path] = None,
+        gradcam_output_path: str | Path | None = None,
     ) -> dict:
         """Run inference on a single image.
 
@@ -104,7 +103,7 @@ class Predictor:
     def predict_batch(
         self,
         image_dir: str | Path,
-        output_dir: Optional[str | Path] = None,
+        output_dir: str | Path | None = None,
     ) -> list[dict]:
         """Run inference on all images in a directory.
 

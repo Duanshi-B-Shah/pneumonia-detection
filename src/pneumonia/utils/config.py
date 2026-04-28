@@ -6,7 +6,6 @@ from pathlib import Path
 import yaml
 from pydantic import BaseModel, field_validator
 
-
 # ── Sub-configs ──────────────────────────────────────────────────────
 
 class DataConfig(BaseModel):

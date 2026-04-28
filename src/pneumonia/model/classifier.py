@@ -1,7 +1,6 @@
 """EfficientNet-based binary classifier for chest X-ray images."""
 from __future__ import annotations
 
-
 import timm
 import torch
 import torch.nn as nn

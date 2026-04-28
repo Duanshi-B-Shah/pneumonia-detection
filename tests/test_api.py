@@ -5,8 +5,8 @@ import io
 
 import numpy as np
 import pytest
-from PIL import Image
 from fastapi.testclient import TestClient
+from PIL import Image
 
 
 @pytest.fixture
