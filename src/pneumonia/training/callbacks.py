@@ -1,4 +1,5 @@
 """Training callbacks: early stopping and model checkpointing."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -120,9 +121,7 @@ class ModelCheckpoint:
 
             path = self.checkpoint_dir / "best_model.pth"
             torch.save(checkpoint, path)
-            logger.info(
-                f"Checkpoint saved: {self.monitor}={score:.4f} (epoch {epoch}) → {path}"
-            )
+            logger.info(f"Checkpoint saved: {self.monitor}={score:.4f} (epoch {epoch}) → {path}")
             return True
 
         return False

@@ -1,4 +1,5 @@
 """Configuration loader using Pydantic models and YAML."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -7,6 +8,7 @@ import yaml
 from pydantic import BaseModel, field_validator
 
 # ── Sub-configs ──────────────────────────────────────────────────────
+
 
 class DataConfig(BaseModel):
     root: str = "data/processed"
@@ -67,6 +69,7 @@ class MLflowConfig(BaseModel):
 
 
 # ── Root config ──────────────────────────────────────────────────────
+
 
 class Config(BaseModel):
     data: DataConfig = DataConfig()

@@ -1,4 +1,5 @@
 """Custom dataset and DataLoader factory for chest X-ray images."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -38,9 +39,7 @@ class ChestXrayDataset:
 
         # Select transforms based on split
         if split == "train":
-            transform = get_train_transforms(
-                config.data.image_size, config.augmentation
-            )
+            transform = get_train_transforms(config.data.image_size, config.augmentation)
         else:
             transform = get_val_transforms(config.data.image_size)
 
@@ -54,9 +53,7 @@ class ChestXrayDataset:
         for cls_idx, cls_name in enumerate(self.CLASS_NAMES):
             count = targets.count(cls_idx)
             class_counts[cls_name] = count
-        logger.info(
-            f"[{self.split}] Loaded {len(targets)} images: {class_counts}"
-        )
+        logger.info(f"[{self.split}] Loaded {len(targets)} images: {class_counts}")
 
     @property
     def targets(self) -> list[int]:

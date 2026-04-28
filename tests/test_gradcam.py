@@ -1,4 +1,5 @@
 """Tests for Grad-CAM visualization."""
+
 from __future__ import annotations
 
 from pathlib import Path

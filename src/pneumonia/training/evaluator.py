@@ -1,4 +1,5 @@
 """Model evaluation — metrics computation, confusion matrix, ROC curve."""
+
 from __future__ import annotations
 
 import argparse
@@ -90,9 +91,7 @@ class Evaluator:
         logger.info("\nClassification Report:")
         logger.info(
             "\n"
-            + classification_report(
-                labels, preds, target_names=self.CLASS_NAMES, zero_division=0
-            )
+            + classification_report(labels, preds, target_names=self.CLASS_NAMES, zero_division=0)
         )
 
         return metrics

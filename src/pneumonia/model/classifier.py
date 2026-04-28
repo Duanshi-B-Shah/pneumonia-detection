@@ -1,4 +1,5 @@
 """EfficientNet-based binary classifier for chest X-ray images."""
+
 from __future__ import annotations
 
 import timm
@@ -86,9 +87,7 @@ class PneumoniaClassifier(nn.Module):
         # Fallback for other architectures
         if hasattr(self.backbone, "features"):
             return self.backbone.features[-1]
-        raise AttributeError(
-            f"Cannot find target layer for Grad-CAM in {self.config.backbone}"
-        )
+        raise AttributeError(f"Cannot find target layer for Grad-CAM in {self.config.backbone}")
 
 
 def build_model(config: ModelConfig, device: str = "cpu") -> PneumoniaClassifier:
@@ -105,9 +104,7 @@ def build_model(config: ModelConfig, device: str = "cpu") -> PneumoniaClassifier
     model = model.to(device)
     total_params = sum(p.numel() for p in model.parameters())
     trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
-    logger.info(
-        f"Model built: {total_params:,} total params, {trainable:,} trainable"
-    )
+    logger.info(f"Model built: {total_params:,} total params, {trainable:,} trainable")
     return model
 
 

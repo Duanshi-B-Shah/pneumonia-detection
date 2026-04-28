@@ -1,4 +1,5 @@
 """Two-phase training loop with MLflow experiment tracking."""
+
 from __future__ import annotations
 
 import argparse
@@ -171,18 +172,16 @@ class Trainer:
         optimizer = self._build_optimizer()
         scheduler = self._build_scheduler(optimizer)
 
-        logger.info(f"\n{'='*60}")
+        logger.info(f"\n{'=' * 60}")
         logger.info(f"Phase: {phase_name} | Epochs: {num_epochs}")
-        logger.info(f"{'='*60}")
+        logger.info(f"{'=' * 60}")
 
         for epoch_i in range(num_epochs):
             epoch = start_epoch + epoch_i
             logger.info(f"\nEpoch {epoch + 1}")
 
             # Train
-            train_loss = self._train_epoch(
-                self.loaders["train"], optimizer, scheduler
-            )
+            train_loss = self._train_epoch(self.loaders["train"], optimizer, scheduler)
             mlflow.log_metric("train_loss", train_loss, step=epoch)
 
             # Validate
@@ -225,21 +224,21 @@ class Trainer:
 
         with mlflow.start_run():
             # Log config
-            mlflow.log_params({
-                "backbone": self.config.model.backbone,
-                "learning_rate": self.config.training.learning_rate,
-                "batch_size": self.config.training.batch_size,
-                "dropout": self.config.model.dropout,
-                "epochs_frozen": self.config.training.epochs_frozen,
-                "epochs_unfrozen": self.config.training.epochs_unfrozen,
-                "seed": self.config.seed,
-            })
+            mlflow.log_params(
+                {
+                    "backbone": self.config.model.backbone,
+                    "learning_rate": self.config.training.learning_rate,
+                    "batch_size": self.config.training.batch_size,
+                    "dropout": self.config.model.dropout,
+                    "epochs_frozen": self.config.training.epochs_frozen,
+                    "epochs_unfrozen": self.config.training.epochs_unfrozen,
+                    "seed": self.config.seed,
+                }
+            )
 
             # Phase 1: Frozen backbone
             self.model.freeze_backbone()
-            next_epoch = self._train_phase(
-                "frozen", self.config.training.epochs_frozen
-            )
+            next_epoch = self._train_phase("frozen", self.config.training.epochs_frozen)
 
             # Reset early stopping for phase 2
             self.early_stopping = EarlyStopping(
@@ -259,9 +258,7 @@ class Trainer:
             logger.info("Final evaluation on test set")
             logger.info("=" * 60)
 
-            test_metrics = self.evaluator.evaluate(
-                self.loaders["test"], output_dir="evaluation"
-            )
+            test_metrics = self.evaluator.evaluate(self.loaders["test"], output_dir="evaluation")
             for k, v in test_metrics.items():
                 mlflow.log_metric(f"test_{k}", v)
 

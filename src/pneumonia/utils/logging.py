@@ -1,4 +1,5 @@
 """Structured logging setup for the project."""
+
 from __future__ import annotations
 
 import logging

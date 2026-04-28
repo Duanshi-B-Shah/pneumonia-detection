@@ -3,6 +3,7 @@
 Generates heatmap overlays showing which image regions drove the prediction.
 Uses the pytorch-grad-cam library for robust, hook-based extraction.
 """
+
 from __future__ import annotations
 
 from pathlib import Path

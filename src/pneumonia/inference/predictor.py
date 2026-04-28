@@ -1,4 +1,5 @@
 """Inference pipeline for single and batch predictions."""
+
 from __future__ import annotations
 
 import argparse
@@ -94,9 +95,7 @@ class Predictor:
             self.explainer.explain_and_save(image_path, gradcam_output_path)
             result["gradcam_path"] = str(gradcam_output_path)
 
-        logger.info(
-            f"Prediction: {label} ({confidence:.2%}) | {latency_ms:.1f}ms | {image_path}"
-        )
+        logger.info(f"Prediction: {label} ({confidence:.2%}) | {latency_ms:.1f}ms | {image_path}")
 
         return result
 
@@ -118,10 +117,7 @@ class Predictor:
         results = []
 
         extensions = {".jpg", ".jpeg", ".png"}
-        image_files = sorted(
-            p for p in image_dir.iterdir()
-            if p.suffix.lower() in extensions
-        )
+        image_files = sorted(p for p in image_dir.iterdir() if p.suffix.lower() in extensions)
 
         logger.info(f"Batch inference: {len(image_files)} images from {image_dir}")
 

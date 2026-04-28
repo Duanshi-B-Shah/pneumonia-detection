@@ -1,4 +1,5 @@
 """Image augmentation pipelines for training and inference."""
+
 from __future__ import annotations
 
 from torchvision import transforms
@@ -24,9 +25,7 @@ def get_train_transforms(image_size: int, aug_cfg: AugmentationConfig) -> transf
         transform_list.append(transforms.RandomHorizontalFlip(p=0.5))
 
     if aug_cfg.rotation_degrees > 0:
-        transform_list.append(
-            transforms.RandomRotation(degrees=aug_cfg.rotation_degrees)
-        )
+        transform_list.append(transforms.RandomRotation(degrees=aug_cfg.rotation_degrees))
 
     if aug_cfg.brightness > 0 or aug_cfg.contrast > 0:
         transform_list.append(
@@ -45,21 +44,25 @@ def get_train_transforms(image_size: int, aug_cfg: AugmentationConfig) -> transf
             )
         )
 
-    transform_list.extend([
-        transforms.ToTensor(),
-        transforms.Normalize(mean=IMAGENET_MEAN, std=IMAGENET_STD),
-    ])
+    transform_list.extend(
+        [
+            transforms.ToTensor(),
+            transforms.Normalize(mean=IMAGENET_MEAN, std=IMAGENET_STD),
+        ]
+    )
 
     return transforms.Compose(transform_list)
 
 
 def get_val_transforms(image_size: int) -> transforms.Compose:
     """Build validation/test transform pipeline (no augmentation)."""
-    return transforms.Compose([
-        transforms.Resize((image_size, image_size)),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=IMAGENET_MEAN, std=IMAGENET_STD),
-    ])
+    return transforms.Compose(
+        [
+            transforms.Resize((image_size, image_size)),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=IMAGENET_MEAN, std=IMAGENET_STD),
+        ]
+    )
 
 
 def get_inference_transforms(image_size: int) -> transforms.Compose:

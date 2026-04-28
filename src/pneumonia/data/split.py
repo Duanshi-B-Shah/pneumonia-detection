@@ -3,6 +3,7 @@
 The original Kaggle dataset has a tiny validation set (16 images).
 This module merges all images and creates a proper stratified split.
 """
+
 from __future__ import annotations
 
 import shutil
@@ -72,7 +73,8 @@ def split_dataset(
 
     # First split: train vs (val + test)
     train_paths, temp_paths, train_labels, temp_labels = train_test_split(
-        paths, labels,
+        paths,
+        labels,
         test_size=(val_ratio + test_ratio),
         stratify=labels,
         random_state=seed,
@@ -81,7 +83,8 @@ def split_dataset(
     # Second split: val vs test
     relative_val = val_ratio / (val_ratio + test_ratio)
     val_paths, test_paths, val_labels, test_labels = train_test_split(
-        temp_paths, temp_labels,
+        temp_paths,
+        temp_labels,
         test_size=(1.0 - relative_val),
         stratify=temp_labels,
         random_state=seed,

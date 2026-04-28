@@ -1,4 +1,5 @@
 """API route definitions."""
+
 from __future__ import annotations
 
 import tempfile
@@ -100,12 +101,14 @@ async def predict_batch(files: Annotated[list[UploadFile], File()]):
 
         try:
             result = predictor.predict(tmp_path)
-            results.append({
-                "filename": file.filename or "unknown",
-                "label": result["label"],
-                "confidence": result["confidence"],
-                "probability_pneumonia": result["probability_pneumonia"],
-            })
+            results.append(
+                {
+                    "filename": file.filename or "unknown",
+                    "label": result["label"],
+                    "confidence": result["confidence"],
+                    "probability_pneumonia": result["probability_pneumonia"],
+                }
+            )
         finally:
             Path(tmp_path).unlink(missing_ok=True)
 

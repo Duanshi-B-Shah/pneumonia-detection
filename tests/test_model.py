@@ -1,4 +1,5 @@
 """Tests for the PneumoniaClassifier model."""
+
 from __future__ import annotations
 
 import torch

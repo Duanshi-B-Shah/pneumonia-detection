@@ -1,4 +1,5 @@
 """Tests for data loading and augmentation."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -58,17 +59,13 @@ class TestChestXrayDataset:
     def test_load_dataset(self, sample_data_dir: Path, config: Config):
         """Dataset should load without errors."""
         config.data.root = str(sample_data_dir)
-        dataset = ChestXrayDataset(
-            root=sample_data_dir, split="train", config=config
-        )
+        dataset = ChestXrayDataset(root=sample_data_dir, split="train", config=config)
         assert len(dataset) == 10  # 5 NORMAL + 5 PNEUMONIA
 
     def test_class_weights(self, sample_data_dir: Path, config: Config):
         """Class weights should sum to 1."""
         config.data.root = str(sample_data_dir)
-        dataset = ChestXrayDataset(
-            root=sample_data_dir, split="train", config=config
-        )
+        dataset = ChestXrayDataset(root=sample_data_dir, split="train", config=config)
         weights = dataset.get_class_weights()
         assert len(weights) == 2
         assert abs(weights.sum().item() - 1.0) < 1e-5
@@ -76,9 +73,7 @@ class TestChestXrayDataset:
     def test_sampler(self, sample_data_dir: Path, config: Config):
         """Weighted sampler should have same length as dataset."""
         config.data.root = str(sample_data_dir)
-        dataset = ChestXrayDataset(
-            root=sample_data_dir, split="train", config=config
-        )
+        dataset = ChestXrayDataset(root=sample_data_dir, split="train", config=config)
         sampler = dataset.get_sampler()
         assert len(list(sampler)) == len(dataset)
 

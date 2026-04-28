@@ -1,4 +1,5 @@
 """FastAPI application for pneumonia detection."""
+
 from __future__ import annotations
 
 from contextlib import asynccontextmanager

@@ -1,4 +1,5 @@
 """Shared test fixtures for the pneumonia detection test suite."""
+
 from __future__ import annotations
 
 import tempfile
@@ -43,9 +44,7 @@ def model(model_config: ModelConfig) -> PneumoniaClassifier:
 @pytest.fixture
 def sample_image_path() -> str:
     """Create a temporary sample image for testing."""
-    img = Image.fromarray(
-        np.random.randint(0, 255, (224, 224, 3), dtype=np.uint8)
-    )
+    img = Image.fromarray(np.random.randint(0, 255, (224, 224, 3), dtype=np.uint8))
     with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as f:
         img.save(f.name)
         return f.name
@@ -66,8 +65,6 @@ def sample_data_dir(tmp_path: Path) -> Path:
             cls_dir.mkdir(parents=True)
             # Create a few sample images per class
             for i in range(5):
-                img = Image.fromarray(
-                    np.random.randint(0, 255, (64, 64, 3), dtype=np.uint8)
-                )
+                img = Image.fromarray(np.random.randint(0, 255, (64, 64, 3), dtype=np.uint8))
                 img.save(cls_dir / f"sample_{i}.png")
     return tmp_path
