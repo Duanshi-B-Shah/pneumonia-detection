@@ -1,0 +1,81 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pneumonia-detection"
+version = "0.1.0"
+description = "End-to-end pneumonia detection from chest X-rays with Grad-CAM interpretability"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "Duanshi Shah", email = "duanshis@amazon.com"},
+]
+
+dependencies = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "timm>=0.9.0",
+    "grad-cam>=1.4.0",
+    "Pillow>=10.0.0",
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "scikit-learn>=1.3.0",
+    "matplotlib>=3.7.0",
+    "seaborn>=0.12.0",
+    "mlflow>=2.8.0",
+    "pyyaml>=6.0",
+    "pydantic>=2.0.0",
+    "tqdm>=4.65.0",
+]
+
+[project.optional-dependencies]
+api = [
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "python-multipart>=0.0.6",
+]
+ui = [
+    "gradio>=4.0.0",
+]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.1.0",
+    "pre-commit>=3.5.0",
+    "ipykernel>=6.25.0",
+    "jupyter>=1.0.0",
+]
+onnx = [
+    "onnx>=1.15.0",
+    "onnxruntime>=1.16.0",
+]
+all = [
+    "pneumonia-detection[api,ui,dev,onnx]",
+]
+
+[project.scripts]
+pneumonia-train = "pneumonia.training.trainer:main"
+pneumonia-predict = "pneumonia.inference.predictor:main"
+pneumonia-serve = "api.app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 100
+fix = true
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "SIM", "RUF"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["pneumonia"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-v --tb=short --cov=src/pneumonia --cov-report=term-missing"

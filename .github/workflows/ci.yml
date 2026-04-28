@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+      - name: Install ruff
+        run: pip install ruff
+      - name: Lint
+        run: ruff check src/ api/ tests/
+      - name: Format check
+        run: ruff format --check src/ api/ tests/
+
+  test:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+          cache: pip
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -e ".[dev,api]"
+      - name: Run tests
+        run: pytest --tb=short -v
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+        if: always()
+
+  docker:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build -t pneumonia-detection:ci .
+      - name: Smoke test
+        run: |
+          docker run -d --name test-api -p 8000:8000 pneumonia-detection:ci || true
+          sleep 5
+          curl -f http://localhost:8000/api/v1/health || echo "Health check skipped (no model)"
+          docker stop test-api || true

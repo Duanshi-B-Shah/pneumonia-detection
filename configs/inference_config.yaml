@@ -1,0 +1,27 @@
+# ─── Model ────────────────────────────────────────────────────────────
+model:
+  checkpoint: checkpoints/best_model.pth
+  backbone: efficientnet_b0
+  num_classes: 1
+  dropout: 0.3
+
+# ─── Preprocessing ────────────────────────────────────────────────────
+preprocessing:
+  image_size: 224
+  normalize:
+    mean: [0.485, 0.456, 0.406]
+    std: [0.229, 0.224, 0.225]
+
+# ─── Inference ────────────────────────────────────────────────────────
+inference:
+  threshold: 0.5
+  device: cpu
+  generate_gradcam: true
+  gradcam_layer: features  # last conv layer of EfficientNet
+
+# ─── API ──────────────────────────────────────────────────────────────
+api:
+  host: 0.0.0.0
+  port: 8000
+  max_file_size_mb: 10
+  allowed_extensions: [".jpg", ".jpeg", ".png"]

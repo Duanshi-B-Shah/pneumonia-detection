@@ -1,0 +1,63 @@
+# ─── Data ─────────────────────────────────────────────────────────────
+data:
+  root: data/processed
+  image_size: 224
+  num_workers: 4
+  pin_memory: true
+
+# ─── Augmentation ─────────────────────────────────────────────────────
+augmentation:
+  horizontal_flip: true
+  rotation_degrees: 15
+  brightness: 0.2
+  contrast: 0.2
+  affine_translate: [0.05, 0.05]
+  affine_scale: [0.9, 1.1]
+
+# ─── Model ────────────────────────────────────────────────────────────
+model:
+  backbone: efficientnet_b0
+  pretrained: true
+  num_classes: 1  # binary classification (sigmoid)
+  dropout: 0.3
+
+# ─── Training ─────────────────────────────────────────────────────────
+training:
+  batch_size: 32
+  epochs_frozen: 5       # backbone frozen
+  epochs_unfrozen: 15    # full fine-tuning
+  learning_rate: 1.0e-4
+  weight_decay: 1.0e-4
+  scheduler: cosine_warm_restarts
+  scheduler_t0: 5
+  scheduler_tmult: 2
+
+# ─── Loss ─────────────────────────────────────────────────────────────
+loss:
+  type: bce_weighted
+  pos_weight: 0.35  # ~1341/3875 (normal/pneumonia ratio)
+
+# ─── Early Stopping ──────────────────────────────────────────────────
+early_stopping:
+  patience: 5
+  min_delta: 0.001
+  monitor: val_recall  # optimize for recall
+
+# ─── Checkpointing ───────────────────────────────────────────────────
+checkpoint:
+  dir: checkpoints
+  save_best: true
+  monitor: val_recall
+  mode: max
+
+# ─── MLflow ───────────────────────────────────────────────────────────
+mlflow:
+  experiment_name: pneumonia-detection
+  tracking_uri: mlruns
+  log_model: true
+
+# ─── Device ───────────────────────────────────────────────────────────
+device: auto  # auto-detect CUDA/MPS/CPU
+
+# ─── Seed ─────────────────────────────────────────────────────────────
+seed: 42
