@@ -31,9 +31,9 @@ An end-to-end Machine Learning system that classifies chest X-ray images as **No
 
 This project takes a **chest X-ray image** as input and:
 
-1. **Classifies** it as either **Normal** (healthy lungs) or **Pneumonia** (infected lungs)
-2. **Explains** the prediction by highlighting which parts of the X-ray the model focused on (using Grad-CAM heatmaps)
-3. **Serves** predictions through a REST API and an interactive web demo
+1. **Classifies** it as either **Normal** (healthy lungs) or **Pneumonia** (infected lungs).
+2. **Explains** the prediction by highlighting which parts of the X-ray the model focused on (using Grad-CAM heatmaps).
+3. **Serves** predictions through a REST API and an interactive web demo.
 
 Think of it as an AI assistant for radiologists — it can quickly flag suspicious X-rays for priority review.
 
@@ -46,9 +46,9 @@ Think of it as an AI assistant for radiologists — it can quickly flag suspicio
 **Pneumonia** is a lung infection that causes the air sacs (alveoli) to fill with fluid or pus. This makes breathing difficult and can be life-threatening, especially for children and the elderly.
 
 **How doctors detect it:**
-- A **chest X-ray** is the primary diagnostic tool
-- Pneumonia appears as **white/cloudy patches** (called "opacities" or "consolidation") in the lung areas
-- **Normal lungs** appear **dark** on X-rays because air doesn't block X-ray beams
+- A **chest X-ray** is the primary diagnostic tool.
+- Pneumonia appears as **white/cloudy patches** (called "opacities" or "consolidation") in the lung areas.
+- **Normal lungs** appear **dark** on X-rays because air doesn't block X-ray beams.
 
 ### What is a Chest X-Ray?
 
@@ -65,9 +65,9 @@ A chest X-ray (CXR) is essentially a shadow photograph of your chest:
 
 **Machine Learning (ML)** is teaching a computer to recognize patterns by showing it thousands of examples. In this project:
 
-- We showed the model **5,856 chest X-rays** labeled as "Normal" or "Pneumonia"
-- The model learned to distinguish the visual patterns that indicate pneumonia
-- Now it can predict on **new, unseen X-rays** it has never encountered before
+- We showed the model **5,856 chest X-rays** labeled as "Normal" or "Pneumonia".
+- The model learned to distinguish the visual patterns that indicate pneumonia.
+- Now it can predict on **new, unseen X-rays** it has never encountered before.
 
 ### What is Transfer Learning?
 
@@ -309,9 +309,9 @@ Here's what happens when you feed an X-ray into the model:
 
 The raw X-ray image is prepared for the model:
 
-- **Resize** to 224×224 pixels (the model's fixed input size)
-- **Convert** to RGB (3 channels), even though X-rays are grayscale
-- **Normalize** pixel values to match ImageNet statistics
+- **Resize** to 224×224 pixels (the model's fixed input size).
+- **Convert** to RGB (3 channels), even though X-rays are grayscale.
+- **Normalize** pixel values to match ImageNet statistics.
 
 > **Why normalize?** The model was pre-trained on ImageNet photos with specific brightness/contrast ranges. Normalizing X-rays to the same range helps the model apply what it already learned.
 
@@ -319,9 +319,9 @@ The raw X-ray image is prepared for the model:
 
 The image passes through the neural network's convolutional layers:
 
-- **Early layers** detect simple patterns: edges, lines, textures
-- **Middle layers** combine these into shapes: curves, blobs, boundaries
-- **Deep layers** recognize complex structures: lung boundaries, rib patterns, fluid patches
+- **Early layers** detect simple patterns: edges, lines, textures.
+- **Middle layers** combine these into shapes: curves, blobs, boundaries.
+- **Deep layers** recognize complex structures: lung boundaries, rib patterns, fluid patches.
 
 The output is a **feature vector** of 1,280 numbers — a compressed representation of everything meaningful in the image.
 
@@ -339,7 +339,7 @@ A small classification head (2 layers) converts the 1,280 features into a single
 
 - 🔴 **Red** = The model focused heavily here
 - 🔵 **Blue** = The model ignored this area
-- For a good pneumonia prediction, red areas should overlap with the cloudy lung patches
+- For a good pneumonia prediction, red areas should overlap with the cloudy lung patches.
 
 > **Why this matters:** In healthcare, "black box" predictions are not acceptable. Doctors need to verify the AI is looking at the right thing — not making decisions based on image artifacts (like a hospital logo in the corner).
 
@@ -495,8 +495,7 @@ make format  # Auto-fix formatting issues
 
 **Duanshi Shah**
 
-- 🎓 Georgia Tech MSCS (Machine Learning) — Expected Dec 2026
-- 💼 SDE I @ Amazon
+- 💼 CSE I @ Amazon
 - 🔗 [GitHub](https://github.com/Duanshi-B-Shah) · [LinkedIn](https://linkedin.com/in/duanshi-shah)
 
 ---
