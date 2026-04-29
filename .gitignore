@@ -47,3 +47,4 @@ static/gradcam/
 
 # ─── Evaluation outputs ──────────────────────────────────────────────
 evaluation/
+hf-pneumonia-detection/
