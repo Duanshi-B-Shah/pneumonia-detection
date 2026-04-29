@@ -1,6 +1,6 @@
 # 🫁 Pneumonia Detection from Chest X-Rays
 
-![Status](https://img.shields.io/badge/status-trained-brightgreen) ![Accuracy](https://img.shields.io/badge/accuracy-97.1%25-blue) ![Recall](https://img.shields.io/badge/recall-97.9%25-blue) ![AUC](https://img.shields.io/badge/AUC-0.9958-blue) ![Python](https://img.shields.io/badge/python-3.9+-yellow) ![Tests](https://img.shields.io/badge/tests-24%2F24%20passed-brightgreen)
+![Status](https://img.shields.io/badge/status-trained-brightgreen) ![Accuracy](https://img.shields.io/badge/accuracy-97.1%25-blue) ![Recall](https://img.shields.io/badge/recall-97.9%25-blue) ![AUC](https://img.shields.io/badge/AUC-0.9958-blue) ![Python](https://img.shields.io/badge/python-3.9+-yellow) ![Tests](https://img.shields.io/badge/tests-24%2F24%20passed-brightgreen) [![Live Demo](https://img.shields.io/badge/Live_Demo-HuggingFace-yellow)](https://huggingface.co/spaces/Duanshi-B-Shah/pneumonia-detection)
 
 An end-to-end Machine Learning system that classifies chest X-ray images as **Normal** or **Pneumonia** with visual explanations (Grad-CAM heatmaps), a REST API, and an interactive demo UI.
 
