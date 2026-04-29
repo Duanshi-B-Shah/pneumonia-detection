@@ -541,8 +541,7 @@ make format  # Auto-fix formatting issues
 
 **Duanshi Shah**
 
-- 🎓 Georgia Tech MSCS (Machine Learning) — Expected Dec 2026
-- 💼 SDE I @ Amazon
+- 💼 CSE I @ Amazon
 - 🔗 [GitHub](https://github.com/Duanshi-B-Shah) · [LinkedIn](https://linkedin.com/in/duanshi-shah)
 
 ---
