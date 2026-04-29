@@ -42,6 +42,8 @@ Think of it as an AI assistant for radiologists — it can quickly flag suspicio
 
 ## 🖥️ Demo
 
+> ### [🔴 Try the Live Demo → huggingface.co/spaces/Duanshi-B-Shah/pneumonia-detection](https://huggingface.co/spaces/Duanshi-B-Shah/pneumonia-detection)
+
 ### Pneumonia Detected
 
 Upload a chest X-ray with pneumonia → the model flags it with high confidence and shows a Grad-CAM heatmap highlighting the infected lung regions.
@@ -62,8 +64,10 @@ The built-in sidebar explains every step of the pipeline — from what pneumonia
 
 ### Try It Yourself
 
+**Live (no setup needed):** [huggingface.co/spaces/Duanshi-B-Shah/pneumonia-detection](https://huggingface.co/spaces/Duanshi-B-Shah/pneumonia-detection)
+
+**Local:**
 ```bash
-# Start the interactive demo
 streamlit run ui/demo_streamlit.py
 # → Opens at http://localhost:8501
 ```
@@ -77,11 +81,6 @@ streamlit run ui/demo_streamlit.py
 - 📚 Built-in educational guide (sidebar) — beginner-friendly explanations for every step
 - ⚡ Real-time pipeline status indicator
 
-> **📸 Screenshot instructions:** The images above are placeholders. To add your own screenshots:
-> 1. Run the demo: `streamlit run ui/demo_streamlit.py`
-> 2. Take screenshots of Normal prediction, Pneumonia prediction, and the sidebar
-> 3. Save them to `assets/demo_normal.png`, `assets/demo_pneumonia.png`, `assets/demo_sidebar.png`
-> 4. Commit and push — the README will render them automatically
 
 ---
 
@@ -314,6 +313,9 @@ Prints the classification report and generates:
 
 ### 6. Launch the Demo
 
+**Option A — Live demo (no setup):** [huggingface.co/spaces/Duanshi-B-Shah/pneumonia-detection](https://huggingface.co/spaces/Duanshi-B-Shah/pneumonia-detection)
+
+**Option B — Run locally:**
 ```bash
 streamlit run ui/demo_streamlit.py
 # → Opens at http://localhost:8501
